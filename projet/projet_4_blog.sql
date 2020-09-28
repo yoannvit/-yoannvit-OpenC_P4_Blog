@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 15, 2020 at 02:18 PM
+-- Generation Time: Sep 22, 2020 at 12:38 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.2.25
 
@@ -37,15 +37,8 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text NOT NULL,
   `flag` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_comments_posts` (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `post_id`, `author`, `comment_date`, `comment`, `flag`) VALUES
-(75, 59, 'adminddd', '2020-09-15 18:16:13', 'ddddddddddd', 1);
+  KEY `post_id` (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -61,14 +54,14 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `content` text NOT NULL,
   `creation_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `author`, `content`, `creation_date`) VALUES
-(59, 'dddd', 'admin', '<p>dddddddddddddd</p>', '2020-09-15 18:15:58');
+(61, 'dddd', 'admin', '<p>ddddd</p>', '2020-09-22 16:38:01');
 
 -- --------------------------------------------------------
 
@@ -122,7 +115,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `creation_date`) VALUES
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_comments_posts` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
+ 
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
+ 
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
